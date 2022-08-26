@@ -35,17 +35,9 @@ const AddEditTour = () => {
 
     const onInputChange = (e) => {
         const { name, value } = e.target
-        // console.log(e.target.value);
         setTourData({ ...tourData, [name]: value })
     }
 
-    // const handleAddTag = (tag) => {
-    //     setTourData({ ...tourData, tags: [...tourData.tags, tag] })
-    // }
-
-    // const handleDeleteTag = (deleteTag) => {
-    //     setTourData({ ...tourData, tags: tourData.tags.filter((tag) => tag !== deleteTag) })
-    // }
 
 
     const handleAddTag = (tag) => {
