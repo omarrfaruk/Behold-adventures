@@ -3,11 +3,11 @@ import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { getTours } from '../redux/features/tourSlice';
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import CardTour from '../components/CardTour';
 
 const Home = () => {
-    const location = useLocation()
+    // const location = useLocation()
     const dispatch = useDispatch()
     const { tours, loading, error } = useSelector(
         (state) => ({
@@ -28,7 +28,6 @@ const Home = () => {
         <div style={{
             margin: "auto",
             padding: "15px",
-            maxWidth: "1000px",
             alignContent: "center",
         }}>
             <MDBRow className="mt-5">
