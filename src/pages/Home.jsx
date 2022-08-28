@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { getTours } from '../redux/features/tourSlice';
 // import { useLocation } from 'react-router-dom'
 import CardTour from '../components/CardTour';
+import Spinner from '../components/Spinner';
 
 const Home = () => {
     // const location = useLocation()
@@ -21,7 +22,7 @@ const Home = () => {
     }, [dispatch])
 
     if (loading) {
-        <p>loading</p>
+        return <Spinner />
     }
 
     return (
