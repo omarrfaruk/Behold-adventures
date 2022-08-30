@@ -13,7 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getTourByUser } from "../redux/features/tourSlice";
+import { deleteTour, getTourByUser } from "../redux/features/tourSlice";
 // import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
@@ -41,6 +41,12 @@ const Dashboard = () => {
 
     if (loading) {
         return <Spinner />
+    }
+
+    const handleDelete = (id) => {
+        if (window.confirm('Are you sure you want to delete?')) {
+            dispatch(deleteTour({ id, toast }))
+        }
     }
 
     return (
@@ -93,23 +99,25 @@ const Dashboard = () => {
                                                 marginTop: "-60px",
                                             }}
                                         >
-                                            <MDBBtn className="mt-1" tag="a" color="none">
-                                                <MDBIcon
+                                            <MDBBtn
+                                                onClick={() => handleDelete(item._id)}
+                                                className="mt-1" tag="a" color="none">
+                                                {/* <MDBIcon
                                                     fas
                                                     icon="trash"
                                                     style={{ color: "#dd4b39" }}
                                                     size="lg"
                                                 // onClick={() => handleDelete(item._id)}
-                                                />
+                                                /> */}
                                                 Delete
                                             </MDBBtn>
                                             <Link to={`/editTour/${item._id}`}>
-                                                <MDBIcon
+                                                {/* <MDBIcon
                                                     fas
                                                     icon="edit"
                                                     style={{ color: "#55acee", marginLeft: "10px" }}
                                                     size="lg"
-                                                />
+                                                /> */}
                                                 Edit
                                             </Link>
                                         </div>

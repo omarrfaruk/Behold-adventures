@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MDBCard, MDBCardBody, MDBValidationItem, MDBBtn, MDBValidation } from 'mdb-react-ui-kit'
+import { MDBCard, MDBCardBody, MDBValidationItem, MDBBtn, MDBValidation, MDBInput } from 'mdb-react-ui-kit'
 import ChipInput from 'material-ui-chip-input'
 import FileBase from 'react-file-base64'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { createTour } from '../redux/features/tourSlice';
+import { createTour, updateTour } from '../redux/features/tourSlice';
 
 const initialState = {
     title: '',
@@ -14,33 +14,57 @@ const initialState = {
 }
 
 const AddEditTour = () => {
+    const { id } = useParams()
+    const [tagErrMsg, setTagErrMsg] = useState(null);
     const [tourData, setTourData] = useState(initialState)
-    const { error, loading } = useSelector((state) => ({ ...state.tour }))
+    const { error, userTours } = useSelector((state) => ({ ...state.tour }))
     const { user } = useSelector((state) => ({ ...state.auth }))
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { title, description, tags } = tourData
+    // console.log(tourData);
+
+    useEffect(() => {
+        if (id) {
+            const singleTour = userTours.find((tour) => tour._id === id);
+            console.log(singleTour);
+            setTourData({ ...singleTour });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
 
     useEffect(() => {
         error && toast.error(error)
     }, [error])
 
+
     const handleSubmit = (e) => {
-        e.preventDefault()
-        if (title && description && tags) {
-            const updatedTourData = { ...tourData, name: user?.result?.name }
-            dispatch(createTour({ updatedTourData, navigate, toast }))
+        e.preventDefault();
+
+        if (!tags.length) {
+            setTagErrMsg("Please provide some tags");
         }
-    }
+
+        if (title && description && tags) {
+            const updatedTourData = { ...tourData, name: user?.result?.name };
+
+            if (!id) {
+                dispatch(createTour({ updatedTourData, navigate, toast }));
+            } else {
+                dispatch(updateTour({ id, updatedTourData, toast, navigate }));
+            }
+            // handleClear();
+        }
+    };
 
     const onInputChange = (e) => {
-        const { name, value } = e.target
-        setTourData({ ...tourData, [name]: value })
+        setTourData({ ...tourData, [e.target.name]: e.target.value })
     }
 
 
 
     const handleAddTag = (tag) => {
+        setTagErrMsg(null);
         setTourData({ ...tourData, tags: [...tourData.tags, tag] });
     };
     const handleDeleteTag = (deleteTag) => {
@@ -66,11 +90,11 @@ const AddEditTour = () => {
             className='container'
         >
             <MDBCard alignment='center'>
-                <h5>Add Tour</h5>
+                <h5>{id ? 'Update Tour' : "Add Tour"}</h5>
                 <MDBCardBody>
                     <MDBValidation onSubmit={handleSubmit} className='row g-3' noValidate>
                         <MDBValidationItem invalid='true' feedback='please provide title' className='col-md-12'>
-                            <input
+                            <MDBInput
                                 placeholder='Enter Title'
                                 type='text'
                                 value={title}
@@ -102,12 +126,13 @@ const AddEditTour = () => {
                                 onAdd={(chip) => handleAddTag(chip)}
                                 onDelete={(tag) => handleDeleteTag(tag)}
                             />
+                            {tagErrMsg && <div style={{ color: 'red', fontSize: '14px', textAlign: 'left', marginTop: '5px' }}>{tagErrMsg}</div>}
                         </div>
                         <div className="d-flex justify-content-start">
                             <FileBase type='file' multiple={false} onDone={({ base64 }) => setTourData({ ...tourData, imageFile: base64 })} />
                         </div>
                         <div className="col-12">
-                            <MDBBtn style={{ width: '100%' }}>Submit</MDBBtn>
+                            <MDBBtn style={{ width: '100%' }}>{id ? 'Update' : 'Submit'}</MDBBtn>
                             <MDBBtn style={{ width: '100%' }} className='mt-2' color='danger' onClick={handleClear}>Clear</MDBBtn>
                         </div>
                     </MDBValidation>
