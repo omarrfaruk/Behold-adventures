@@ -14,9 +14,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteTour, getTourByUser } from "../redux/features/tourSlice";
-// import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import { FiTrash2 } from 'react-icons/fi'
 
 const Dashboard = () => {
 
@@ -102,14 +102,7 @@ const Dashboard = () => {
                                             <MDBBtn
                                                 onClick={() => handleDelete(item._id)}
                                                 className="mt-1" tag="a" color="none">
-                                                {/* <MDBIcon
-                                                    fas
-                                                    icon="trash"
-                                                    style={{ color: "#dd4b39" }}
-                                                    size="lg"
-                                                // onClick={() => handleDelete(item._id)}
-                                                /> */}
-                                                Delete
+                                                <FiTrash2 />
                                             </MDBBtn>
                                             <Link to={`/editTour/${item._id}`}>
                                                 {/* <MDBIcon
