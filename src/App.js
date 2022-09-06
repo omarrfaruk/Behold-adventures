@@ -23,7 +23,7 @@ function App() {
     dispatch(setUser(user))
   }, [dispatch, user])
   return (
-    <div className="App">/
+    <div className="App">
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />

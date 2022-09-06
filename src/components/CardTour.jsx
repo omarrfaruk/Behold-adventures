@@ -20,7 +20,7 @@ const CardTour = ({ imageFile, description, title, tags, _id, name, likes, }) =>
 
     return (
         <MDBCardGroup>
-            <MDBCard className="h-100 mt-2 d-sm-flex" style={{ maxWidth: "20rem" }}>
+            <MDBCard className=" mt-4 d-sm-flex" style={{ maxWidth: "20rem" }}>
                 <MDBCardImage
                     src={imageFile}
                     alt={title}
@@ -35,7 +35,7 @@ const CardTour = ({ imageFile, description, title, tags, _id, name, likes, }) =>
 
                 </span>
                 <MDBCardBody>
-                    <MDBCardTitle className="text-start">{title}</MDBCardTitle>
+                    <MDBCardTitle style={{ color: '#778899' }} className="text-start">{title}</MDBCardTitle>
                     <MDBCardText className="text-start">
                         {excerpt(description)}
                         <Link to={`/tour/${_id}`}>Read More</Link>

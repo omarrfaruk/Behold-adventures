@@ -16,8 +16,8 @@ const RelatedTours = ({ relatedTours, tourId }) => {
         <>
             {relatedTours && relatedTours.length > 0 && (
                 <>
-                    {relatedTours.length > 1 && <h4>Related Tours</h4>}
-                    <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+                    {relatedTours.length > 1 && <h4 className="py-3">Related Tours</h4>}
+                    <MDBRow className="row-cols-1 row-cols-md-3 mb-5 g-4">
                         {relatedTours
                             .filter((item) => item._id !== tourId)
                             .splice(0, 3)
@@ -29,6 +29,7 @@ const RelatedTours = ({ relatedTours, tourId }) => {
                                                 src={item.imageFile}
                                                 alt={item.title}
                                                 position="top"
+                                                style={{ maxWidth: "100%", height: "180px" }}
                                             />
                                         </Link>
                                         <span className="text-start tag-card">

@@ -3,6 +3,7 @@ body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFAF0 !important;
 }
 
 code {
@@ -13,7 +14,7 @@ code {
 .header-text {
   color: black;
   font-weight: 500;
-  margin-top: 7px;
+  margin-top: 15px;
   font-size: 17px;
 }
 
@@ -36,4 +37,8 @@ code {
   font-size: 18px;
   margin: 0 0 0 4px;
   font-weight: 500;
+}
+
+.reShadow {
+  box-shadow: none !important;
 }
