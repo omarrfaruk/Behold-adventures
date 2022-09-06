@@ -77,12 +77,25 @@ export const searchTours = createAsyncThunk(
     }
 );
 
+export const toursByTag = createAsyncThunk(
+    "tour/toursByTag",
+    async (tag, { rejectWithValue }) => {
+        try {
+            const response = await api.getTourByTag(tag);
+            return response.data;
+        } catch (err) {
+            return rejectWithValue(err.response.data);
+        }
+    }
+);
+
 
 const tourSlice = createSlice({
     name: 'tour',
     initialState: {
         tour: {},
         tours: [],
+        tagTours: [],
         userTours: [],
         error: '',
         loading: false
@@ -167,17 +180,6 @@ const tourSlice = createSlice({
             state.loading = false;
             state.error = action.payload?.message
         },
-        // [searchTours.pending]: (state, action) => {
-        //     state.loading = true;
-        // },
-        // [searchTours.fulfilled]: (state, action) => {
-        //     state.loading = false;
-        //     state.tours = action.payload;
-        // },
-        // [searchTours.rejected]: (state, action) => {
-        //     state.loading = false;
-        //     state.error = action.payload?.message
-        // },
         [searchTours.pending]: (state, action) => {
             state.loading = true;
         },
@@ -186,6 +188,17 @@ const tourSlice = createSlice({
             state.tours = action.payload;
         },
         [searchTours.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload.message;
+        },
+        [toursByTag.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [toursByTag.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.tagTours = action.payload;
+        },
+        [toursByTag.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload.message;
         },

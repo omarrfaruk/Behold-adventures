@@ -5,10 +5,7 @@ import {
     MDBCardTitle,
     MDBCardText,
     MDBCardImage,
-    MDBCardGroup,
-    MDBBtn,
-    MDBIcon,
-    MDBTooltip,
+    MDBCardGroup
 } from "mdb-react-ui-kit";
 import { Link } from 'react-router-dom';
 
