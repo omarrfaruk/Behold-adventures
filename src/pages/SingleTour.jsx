@@ -13,6 +13,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { getRelatedTours, getTour } from '../redux/features/tourSlice';
 import RelatedTours from '../components/RelatedTours';
+import DisqusThread from '../components/DisqusThread';
+import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 
 const SingleTour = () => {
 
@@ -51,12 +53,13 @@ const SingleTour = () => {
                             style={{ float: "left", color: "#000" }}
                             onClick={() => navigate("/")}
                         >
-                            <MDBIcon
+                            {/* <MDBIcon
                                 fas
                                 size="lg"
                                 icon="long-arrow-alt-left"
                                 style={{ float: "left" }}
-                            />
+                            /> */}
+                            <BsFillArrowLeftCircleFill className='fs-3' />
                         </MDBBtn>
                         <h3>{tour.title}</h3>
                         <span>
@@ -84,6 +87,7 @@ const SingleTour = () => {
                         </MDBCardText>
                     </MDBCardBody>
                 </MDBCard>
+                <DisqusThread id={id} title={tour.title} path={`/tour/${id}`} />
                 <RelatedTours relatedTours={relatedTours} tourId={id} />
             </MDBContainer>
         </>

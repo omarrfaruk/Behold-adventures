@@ -57,9 +57,9 @@ const Dashboard = () => {
                 alignContent: "center",
             }}
         >
-            {/* {userTours.length === 0 && (
+            {userTours.length === 0 && (
                 <h3>No tour available with the user: {user?.result?.name}</h3>
-            )} */}
+            )}
 
             {userTours.length > 0 && (
                 <>
