@@ -2,24 +2,22 @@ import React from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
-import { getTours } from '../redux/features/tourSlice';
-// import { useLocation } from 'react-router-dom'
+import { getTours, setCurrentPage } from '../redux/features/tourSlice';
 import CardTour from '../components/CardTour';
 import Spinner from '../components/Spinner';
+import Pagination from '../components/Pagination';
 
 const Home = () => {
-    // const location = useLocation()
     const dispatch = useDispatch()
-    const { tours, loading, error } = useSelector(
+    const { tours, loading, currentPage, numberOfPages } = useSelector(
         (state) => ({
             ...state.tour,
         })
     );
-    console.log(tours, error)
 
     useEffect(() => {
-        dispatch(getTours())
-    }, [dispatch])
+        dispatch(getTours(currentPage))
+    }, [currentPage, dispatch])
 
     if (loading) {
         return <Spinner />
@@ -45,6 +43,12 @@ const Home = () => {
                     </MDBContainer>
                 </MDBCol>
             </MDBRow>
+            <Pagination
+                setCurrentPage={setCurrentPage}
+                numberOfPages={numberOfPages}
+                currentPage={currentPage}
+                dispatch={dispatch}
+            />
         </div>
     );
 };
