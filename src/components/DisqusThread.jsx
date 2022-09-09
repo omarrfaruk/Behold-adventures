@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SHORTNAME = 'behold-adventures';
-const WEBSITE_URL = 'https://behold-adventures.onrender.com/';
+const WEBSITE_URL = 'https://behold-adventures.netlify.app/';
 
 function renderDisqus() {
     if (window.DISQUS === undefined) {
