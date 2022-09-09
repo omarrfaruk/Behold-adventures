@@ -4,7 +4,6 @@ import { BsChevronBarDown } from "react-icons/bs";
 import {
     MDBNavbar,
     MDBContainer,
-    MDBIcon,
     MDBNavbarNav,
     MDBNavbarItem,
     MDBNavbarLink,
@@ -22,7 +21,6 @@ import decode from "jwt-decode";
 
 const Header = () => {
     const [search, setSearch] = useState("");
-    const [show, setShow] = useState(false)
     const { user } = useSelector((state) => ({ ...state.auth }))
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -55,75 +53,8 @@ const Header = () => {
 
 
     return (
-        // <MDBNavbar fixed="top" expand='lg' style={{ backgroundColor: '#FFFAF0' }}>
-        //     <MDBContainer>
-        //         <MDBNavbarBrand
-        //             href="/"
-        //         >
-        //             BEHOLD TOUR
-        //         </MDBNavbarBrand>
-        //         <MDBNavbarToggler
-        //             type="button"
-        //             aria-expanded='false'
-        //             onClick={() => setShow(!show)}
-        //             style={{ color: 'black' }}
-        //         >
-        //             <MDBIcon icon="bars" fas />
-        //         </MDBNavbarToggler>
-        //         <MDBCollapse show={show} navbar>
-        //             <MDBNavbarNav right fullWidth={false} className='mb-2 mb-lg-0'>
-        //                 <MDBNavbarItem>
-        //                     <MDBNavbarLink href="/">
-        //                         <p className="header-text">Home</p>
-        //                     </MDBNavbarLink>
-        //                 </MDBNavbarItem>
-        //                 {user?.result?._id && (
-        //                     <>
-        //                         <MDBNavbarItem>
-        //                             <MDBNavbarLink href="/addtour">
-        //                                 <p className="header-text">Add Tour</p>
-        //                             </MDBNavbarLink>
-        //                         </MDBNavbarItem>
-        //                         <MDBNavbarItem>
-        //                             <MDBNavbarLink href="/dashboard">
-        //                                 <p className="header-text">Dashboard</p>
-        //                             </MDBNavbarLink>
-        //                         </MDBNavbarItem>
-        //                     </>
-        //                 )}
-        //                 {user?.result?._id ? (
-        //                     <MDBNavbarItem>
-        //                         <MDBNavbarLink href="/login">
-        //                             <p className="header-text"
-        //                                 onClick={handleLogout}
-        //                             >Logout</p>
-        //                         </MDBNavbarLink>
-        //                     </MDBNavbarItem>
-        //                 ) : (
-        //                     <MDBNavbarItem>
-        //                         <MDBNavbarLink href="/login">
-        //                             <p className="header-text">Login</p>
-        //                         </MDBNavbarLink>
-        //                     </MDBNavbarItem>
-        //                 )}
-        //             </MDBNavbarNav>
-        //             <form className="d-flex input-group w-auto" onSubmit={handleSubmit}>
-        //                 <input
-        //                     type="text"
-        //                     className="form-control"
-        //                     placeholder="Search Tour"
-        //                     value={search}
-        //                     onChange={(e) => setSearch(e.target.value)}
-        //                 />
-        //                 <div style={{ marginTop: "5px", marginLeft: "5px" }}>
-        //                     <MDBIcon fas icon="search" />
-        //                 </div>
-        //             </form>
-        //         </MDBCollapse>
-        //     </MDBContainer>
-        // </MDBNavbar>
-        <MDBNavbar style={{ maxWidth: '1200px', margin: 'auto', backgroundColor: '#FFFAF0' }} className="py-4 reShadow" expand='lg' fixed="top" light >
-            <MDBContainer fluid>
+        <MDBNavbar style={{ backgroundColor: '#FFFAF0' }} className="py-4 reShadow" expand='lg' fixed="top" light >
+            <MDBContainer style={{ maxWidth: '1200px', margin: 'auto' }} fluid>
                 <MDBNavbarBrand className="fw-bold" href="/">BEHOLD ADVENTURES</MDBNavbarBrand>
                 <MDBNavbarToggler
                     type='button'
