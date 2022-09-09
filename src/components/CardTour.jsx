@@ -34,7 +34,7 @@ const CardTour = ({ imageFile, description, title, tags, _id, name, likes, }) =>
         if (likes.length > 0) {
             return likes.find((like) => like === userId) ? (
                 <>
-                    <BsHandThumbsUpFill />
+                    <BsHandThumbsUpFill className='small' />
                     &nbsp;
                     {likes.length > 2 ? (
                         <MDBTooltip
@@ -44,19 +44,19 @@ const CardTour = ({ imageFile, description, title, tags, _id, name, likes, }) =>
                             {likes.length} Likes
                         </MDBTooltip>
                     ) : (
-                        `${likes.length} Like${likes.length > 1 ? "s" : ""}`
+                        <span className='small'>{`${likes.length} Like${likes.length > 1 ? "s" : ""}`}</span>
                     )}
                 </>
             ) : (
                 <>
-                    <BsHandThumbsUp />
+                    <BsHandThumbsUp className='small' />
                     &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
                 </>
             );
         }
         return (
             <>
-                <BsHandThumbsUp />
+                <BsHandThumbsUp className='small' />
                 &nbsp;Like
             </>
         );
@@ -77,8 +77,8 @@ const CardTour = ({ imageFile, description, title, tags, _id, name, likes, }) =>
                 />
                 <div className="top-left">{name}</div>
                 <span className="text-start tag-card">
-                    {tags.map((tag) => (
-                        <Link className='small' to={`/tours/tag/${tag}`}> #{tag}</Link>
+                    {tags.map((tag, index) => (
+                        <Link key={index} className='small' to={`/tours/tag/${tag}`}> #{tag}</Link>
                     ))}
                     <MDBBtn
                         style={{ float: "right" }}
